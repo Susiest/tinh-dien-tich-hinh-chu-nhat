@@ -75,7 +75,6 @@
             font-size: 14px;
             margin-top: 10px;
             display: none;
-            /* Default is hidden */
         }
     </style>
     <script>
@@ -85,6 +84,7 @@
             var warningMessage = document.getElementById('warningMessage');
             warningMessage.style.display = 'none'; // Reset the warning message
 
+            // Kiểm tra nhập liệu hợp lệ
             if (isNaN(chieuDai) || isNaN(chieuRong)) {
                 warningMessage.innerText = "Vui lòng nhập giá trị hợp lệ cho chiều dài và chiều rộng.";
                 warningMessage.style.display = 'block';
@@ -97,12 +97,21 @@
                 return;
             }
 
+            // Kiểm tra nếu là hình vuông
+            if (chieuDai === chieuRong) {
+                document.getElementById('ketQua').innerText = "Đây là hình vuông";
+                return;
+            }
+
+            // Kiểm tra chiều dài lớn hơn chiều rộng
             if (chieuDai < chieuRong) {
                 warningMessage.innerText = "Chiều dài phải lớn hơn chiều rộng.";
                 warningMessage.style.display = 'block';
                 return;
-}
-            var dienTich = chieuDai * chieuRong;
+            }
+
+            // Tính diện tích hình chữ nhật
+            var dienTich = (chieuDai * chieuRong).toFixed(2); // Làm tròn đến 2 chữ số thập phân
 
             document.getElementById('ketQua').innerText = "Diện tích hình chữ nhật là: " + dienTich + " m²";
         }
