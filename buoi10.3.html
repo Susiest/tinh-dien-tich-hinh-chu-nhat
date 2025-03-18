@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tính diện tích hình chữ nhật</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        label {
+            font-size: 16px;
+            margin-top: 10px;
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        #ketQua {
+            margin-top: 15px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .warning {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+            /* Default is hidden */
+        }
+    </style>
+    <script>
+        function tinhDienTich() {
+            var chieuDai = parseFloat(document.getElementById('chieuDai').value);
+            var chieuRong = parseFloat(document.getElementById('chieuRong').value);
+            var warningMessage = document.getElementById('warningMessage');
+            warningMessage.style.display = 'none'; // Reset the warning message
+
+            if (isNaN(chieuDai) || isNaN(chieuRong)) {
+                warningMessage.innerText = "Vui lòng nhập giá trị hợp lệ cho chiều dài và chiều rộng.";
+                warningMessage.style.display = 'block';
+                return;
+            }
+
+            if (chieuDai <= 0 || chieuRong <= 0) {
+                warningMessage.innerText = "Chiều dài và chiều rộng phải là các giá trị dương.";
+                warningMessage.style.display = 'block';
+                return;
+            }
+
+            if (chieuDai < chieuRong) {
+                warningMessage.innerText = "Chiều dài phải lớn hơn chiều rộng.";
+                warningMessage.style.display = 'block';
+                return;
+
+            } if (chieuDai = chieuRong) {
+                warningMessage.innerText = "Đây là hình vuông.";
+                warningMessage.style.display = 'block';
+                return;
+            }
+
+            var dienTich = chieuDai * chieuRong;
+
+            document.getElementById('ketQua').innerText = "Diện tích hình chữ nhật là: " + dienTich + " m²";
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Tính diện tích hình chữ nhật</h2>
+        <label for="chieuDai">Chiều dài (m):</label>
+        <input type="text" id="chieuDai" placeholder="Nhập chiều dài">
+        <label for="chieuRong">Chiều rộng (m):</label>
+        <input type="text" id="chieuRong" placeholder="Nhập chiều rộng">
+        <button onclick="tinhDienTich()">Tính diện tích</button>
+        <p id="ketQua"></p>
+        <p id="warningMessage" class="warning"></p>
+    </div>
+</body>
+
+</html>
